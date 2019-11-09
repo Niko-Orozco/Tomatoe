@@ -74,5 +74,5 @@ cnn.fit(imagen_emtrenamiento, steps_per_epoch=pasosm, epochs=epocas, validation_
 dir = './model/'
 if not os.path.exists(dir):
     os.mkdir(dir)
-cnn.save('./model/models.tmt')
-cnn.save_weights('./model/pesos.tmt')
+cnn.save('./model/models.cnt')
+cnn.save_weights('./model/pesos.cnt')
