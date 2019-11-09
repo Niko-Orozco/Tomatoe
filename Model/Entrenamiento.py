@@ -3,8 +3,8 @@ import sys, os
 from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.python.keras import optimizers
 from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.leyers import Dropout, Flatten, Dense, Activation
-from tensorflow.python.keras.leyers import Convolution2D, MaxPooling2D
+from tensorflow.python.keras.layers import Dropout, Flatten, Dense, Activation
+from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D
 from tensorflow.python.keras import backend as K
 
 K.clear_session()
@@ -28,7 +28,7 @@ lr=0.0005
 #Pre Procesamiento de imagenes
 
 entrenamiento_datagen = ImageDataGenerator(
-    rescala=1./255,
+    rescale=1./255,
     shear_range=0.3,
     zoom_range=0.3,
     horizontal_flip=True
@@ -36,7 +36,7 @@ entrenamiento_datagen = ImageDataGenerator(
 
 
 validacion_datagen = ImageDataGenerator(
-    rescala=1./255,
+    rescale=1./255,
 )
 
 
