@@ -56,11 +56,11 @@ imagen_validacion=validacion_datagen.flow_from_directory(
 
 
 #Crear Cnn
-cmm = Sequential()
-cnn.add(Convolution2D(filtrosConv1, tamano_filtro1, pddimg='same', input_size=(altura, longitud,3), activation='relu'))
+cnn = Sequential()
+cnn.add(Convolution2D(filtrosConv1, tamano_filtro1, padding='same', input_shape=(altura, longitud,3), activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
-cnn.add(Convolution2D(filtrosConv2, tamano_filtro2, pddimg='same', activation='relu'))
+cnn.add(Convolution2D(filtrosConv2, tamano_filtro2, padding='same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tamano_pool))
 
 cnn.add(Flatten())
