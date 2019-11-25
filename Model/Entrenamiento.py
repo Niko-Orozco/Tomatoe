@@ -74,7 +74,7 @@ cnn.fit_generator(
     validation_data=validacion_generador,
     validation_steps=validation_steps)
 
-target_dir = './modelo/'
+target_dir = './model/'
 if not os.path.exists(target_dir):
   os.mkdir(target_dir)
 cnn.save('./model/models.cnt')
