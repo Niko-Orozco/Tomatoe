@@ -26,10 +26,6 @@ Builder.load_string('''
 
 class TakePicture(BoxLayout):
     def capture(self):
-        '''
-        Function to capture the images and give them the names
-        according to their captured time and date.
-        '''
         camera = self.ids['camera']
         camera.export_to_png("./photo/t.png")
         print("Captured")
@@ -38,3 +34,6 @@ class TakePicture(BoxLayout):
 class MiCamara(App):
     def build(self):
         return TakePicture()
+
+if __name__ == '__main__':
+    MiCamara().run()
