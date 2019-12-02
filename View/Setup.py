@@ -1,62 +1,52 @@
 #!/usr/bin/env python3
+import sys
+sys.path.append('../')
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from Model import camara as cam
+from Model import predict as pred
 
 kv='''
-<MyWidget>
+<Botones>
     spacing: 10
     padding: 10
     rows:6
-    id: registro
+    id: menu
 
-    BoxLayout:
-        id: cedula
-        Label:
-            text:'Cédula'
-            font_size: 16
-        TextInput:
-            id: key
-            multiline:False
-    BoxLayout:
-        id: nombre
-        Label:
-            text:'Nombre y Apellido'
-            font_size: 16
-        TextInput:
-            multiline:False
-    BoxLayout:
-        id: Correo
-        Label:
-            text:'Correo Electrónico'
-            font_size: 16
-        TextInput:
-            id: mail
-            multiline:False
     BoxLayout:
         id: carga
         Button:
-            text:'Registrar'
+            text:'Tomar Foto'
             font_size: 14
-            on_press: root.reg()
+            on_press: root.Capture()
         Button:
-            text:'Cancelar'
+            center: self.parent.center
             font_size: 14
+            height: 28
+            background_color: (1.1, 1.0, 0.1, 1.1)
+            text:'Consultar estado'
+            font_size: 14
+            on_press: root.Predict()
 '''
 
-class MyWidget(GridLayout):
+class Botones(GridLayout):
     def __init__(self):
-        super(MyWidget, self).__init__()
+        super(Botones, self).__init__()
 
-    def reg(self):
-        print ('El botón si llama la función')
+    def Capture(self):
+        cam.RunCam()
 
-class registroApp(App):
+    def Predict(self):
+        pred.predicts("./Model/photo/t.png")
+
+class Menu(App):
     def build(self):
         Builder.load_string(kv)
-        return MyWidget()
+        return Botones()
 
-if __name__ == '__main__':
-    registroApp().run()
+
+def Startup():
+    Menu().run()

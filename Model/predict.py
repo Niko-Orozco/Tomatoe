@@ -8,7 +8,7 @@ pesos_modelo = './modelo/pesos.h5'
 cnn = load_model(modelo)
 cnn.load_weights(pesos_modelo)
 
-def predict(file):
+def predicts(file):
   x = load_img(file, target_size=(longitud, altura))
   x = img_to_array(x)
   x = np.expand_dims(x, axis=0)

@@ -35,5 +35,5 @@ class MiCamara(App):
     def build(self):
         return TakePicture()
 
-if __name__ == '__main__':
+def RunCam():
     MiCamara().run()
