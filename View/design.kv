@@ -1,0 +1,118 @@
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+
+
+<MyScreenManager>:
+    transition: WipeTransition()
+    VentanaNuevas:
+    VentanaTanda:
+    VentanaMenu:
+
+<VentanaMenu>:
+    name: 'menu'
+    AnchorLayout:
+        FloatLayout:
+        Image:     
+            source: "./Fondos/menus2.jpg"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1, 1
+        BoxLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            padding: 0,10,0,0
+            spacing: 10
+            size_hint:1, 0.25
+            orientation: 'horizontal'
+            # Botones de presentación
+            Button:
+                id: button5
+                text:'Tomar Foto'
+                size_hint: .2, .2
+                font_size: 20
+                on_release: app.root.current = 'nuevas'; app.root.get_screen('nuevas').capture()
+            Button:
+                id: button6
+                text: "Consultar estado"
+                pos: 100,100
+                size_hint: .2, .2
+                font_size: 20
+                on_release: app.root.current = 'tanda'
+
+<VentanaTanda>:
+    name: 'tanda'
+    id: tanda
+    FloatLayout:
+        Image:     
+            source: "./Fondos/menus.jpg"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1, 1
+    BoxLayout:
+        size: root.size
+        orientation: 'vertical'
+        padding: 20
+        spacing: 0
+
+        #label2 muestra la respuesta
+        Label:
+            id: label2
+            color: 1,1,1,1
+            font_size:'30sp'
+            canvas.before:
+                Color:
+                    rgba:  255/255.0, 255/255.0, 255/255.0, 1
+                Rectangle:
+                    pos:self.pos
+                    size: (0,0)
+
+
+        BoxLayout:
+            padding: 0,10,0,10
+            spacing: 10
+            size_hint: .2, .2
+            orientation: 'horizontal'
+            Button:
+                id: button1
+                text: "Mostrar Resultado"
+                on_release: tanda.showanswer()
+
+
+        #Botón Para volver al menu
+        Button:
+            size_hint: .2, .2
+            text: "Volver al menu"
+            font_size:'20sp'
+            on_release: app.root.current = 'menu'
+
+<VentanaNuevas>
+    name: 'nuevas'
+    id: nuevas
+    FloatLayout:
+        Image:     
+            source: "./Fondos/fondocam.jpg"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1, 1
+    BoxLayout:
+        size: (root.size)
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+
+        Camera:
+            id: camera
+            resolution: (640, 480)
+            play: True
+ 
+        Button:
+            text: 'Capture'
+            size_hint_y: None
+            height: '48dp'
+            size_hint: .2, .2
+            on_press: nuevas.capture(); app.root.current = 'menu'
+
+        #Botón Para volver al menu
+        Button:
+            size_hint: .2, .2
+            text: "Volver al menu"
+            on_release: app.root.current = 'menu'

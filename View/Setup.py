@@ -6,47 +6,41 @@ from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-from Model import camara as cam
-from Model import predict as pred
+from kivy.uix.recycleview import RecycleView
+#from Model import predict as pred
+from kivy.uix.screenmanager import ScreenManager, Screen
+Builder.load_file('./design.kv')
 
-kv='''
-<Botones>
-    spacing: 10
-    padding: 10
-    rows:6
-    id: menu
-
-    BoxLayout:
-        id: carga
-        Button:
-            text:'Tomar Foto'
-            font_size: 14
-            on_press: root.Capture()
-        Button:
-            center: self.parent.center
-            font_size: 14
-            height: 28
-            background_color: (1.1, 1.0, 0.1, 1.1)
-            text:'Consultar estado'
-            font_size: 14
-            on_press: root.Predict()
-'''
-
-class Botones(GridLayout):
+class MyScreenManager(ScreenManager):
     def __init__(self):
-        super(Botones, self).__init__()
+        super(MyScreenManager, self).__init__()
 
-    def Capture(self):
-        cam.RunCam()
 
-    def Predict(self):
-        pred.predicts("./Model/photo/t.png")
+class VentanaMenu(Screen):
+    pass
 
-class Menu(App):
+
+class VentanaNuevas(Screen, BoxLayout):
+    def capture(self):
+        camera = self.ids['camera']
+        camera.export_to_png("./photo/t.png")
+        print("Captured")
+
+
+class VentanaTanda(Screen):
+    def showanswer(self):
+        self.ids['label2'].text = "filetext"
+
+
+class RunApp(App):
     def build(self):
-        Builder.load_string(kv)
-        return Botones()
+        return MyScreenManager()
 
+    def on_pause(self):
+        return True
 
-def Startup():
-    Menu().run()
+    def on_resume(self):
+        pass
+
+if __name__ in ('__main__', '__android__'):
+    RunApp().run()

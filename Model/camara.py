@@ -12,7 +12,7 @@ Builder.load_string('''
         resolution: (640, 480)
         play: False
     ToggleButton:
-        text: 'capture'
+        text: 'use camera'
         on_press: camera.play = not camera.play
         size_hint_y: None
         height: '48dp'
@@ -27,7 +27,7 @@ Builder.load_string('''
 class TakePicture(BoxLayout):
     def capture(self):
         camera = self.ids['camera']
-        camera.export_to_png("./photo/t.png")
+        camera.export_to_png("./t.png")
         print("Captured")
 
 
@@ -35,5 +35,7 @@ class MiCamara(App):
     def build(self):
         return TakePicture()
 
-def RunCam():
-    MiCamara().run()
+MiCamara().run()
+
+
+
